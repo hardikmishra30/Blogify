@@ -1,0 +1,12 @@
+.blog-page {
+  flex: 1;
+  padding: 4rem 0;
+  background-color: var(--background-light);
+  min-height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .blog-page {
+    padding: 2rem 0;
+  }
+}

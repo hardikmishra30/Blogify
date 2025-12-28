@@ -1,0 +1,81 @@
+/* Feedback Form Styles */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.feedback-form textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  background-color: var(--background);
+  color: var(--text-primary);
+  resize: vertical;
+  min-height: 120px;
+}
+
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Submit Button */
+.submit-btn {
+  align-self: flex-start;
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover, #1e40af);
+}
+
+/* Success Message (Reuse contact-info look) */
+.success-message {
+  margin-top: 2rem;
+}
+
+.success-message p {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.para {
+  font-weight: bolder;
+}
+.below {
+  margin-top: 5px;
+}
+.para-one {
+  font-size: large;
+}
+.para-two {
+  font-size: large;
+  margin-top: 4px;
+}
+.para-three {
+  font-size: large;
+  margin-top: 4px;
+}
+.para-four {
+  font-size: large;
+  margin-top: 4px;
+}
+
+.error-text {
+  color: #dc2626;
+  font-size: 0.95rem;
+}

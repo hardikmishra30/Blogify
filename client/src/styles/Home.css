@@ -1,0 +1,26 @@
+.home {
+  flex: 1;
+}
+
+.recent-posts {
+  padding: 4rem 0;
+  background-color: var(--background-light);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .recent-posts {
+    padding: 2rem 0;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

@@ -1,0 +1,99 @@
+.my-posts-page {
+  flex: 1;
+  padding: 4rem 0;
+  background-color: var(--background-light);
+  min-height: 80vh;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-item {
+  background-color: var(--background);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  transition: var(--transition);
+}
+
+.post-item:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.post-item-content {
+  flex: 1;
+}
+
+.post-item-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.post-item-excerpt {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.post-item-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.post-item-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.post-item-status.published {
+  background-color: #d1fae5;
+  color: var(--success-color);
+}
+
+.post-item-status.draft {
+  background-color: #fee2e2;
+  color: var(--error-color);
+}
+
+.post-item-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .my-posts-page {
+    padding: 2rem 0;
+  }
+
+  .post-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .post-item-title {
+    font-size: 1.25rem;
+  }
+
+  .post-item-actions {
+    width: 100%;
+  }
+
+  .post-item-actions .btn {
+    flex: 1;
+  }
+}
