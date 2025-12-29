@@ -45,12 +45,14 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "Server is running" });
 });
 
-// Serve static files
-app.use(express.static(path.join(process.cwd(), "public")));
+const __dirname = process.cwd();
 
-// React/Vite fallback
+// Serve Vite build
+app.use(express.static(path.join(__dirname, "public", "dist")));
+
+// SPA fallback
 app.get("*", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
