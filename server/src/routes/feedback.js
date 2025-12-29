@@ -1,5 +1,11 @@
+import express from "express";
+import { sendFeedbackMail } from "../utils/sendMail.js";
+
+const router = express.Router();  
+
 router.post("/", async (req, res) => {
-  const feedback = req.body.feedback || req.body.message || req.body.content;
+  const feedback =
+    req.body.feedback || req.body.message || req.body.content;
 
   if (!feedback) {
     return res.status(400).json({ message: "Feedback is required" });
