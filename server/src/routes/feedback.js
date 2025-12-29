@@ -11,10 +11,26 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    await sendFeedbackMail(feedback);
-    res.status(200).json({ message: "Feedback sent successfully" });
+    // ⏱️ Do NOT let email hang forever
+    await Promise.race([
+      sendFeedbackMail(feedback),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Email timeout")), 10000)
+      ),
+    ]);
+
+    return res.status(200).json({
+      success: true,
+      message: "Feedback sent successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Failed to send feedback" });
+    console.error("Feedback error:", error);
+
+    // 🔥 ALWAYS respond
+    return res.status(200).json({
+      success: false,
+      message: "Feedback received (email may have failed)",
+    });
   }
 });
 

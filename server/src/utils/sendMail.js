@@ -7,7 +7,13 @@ export const sendFeedbackMail = async (message) => {
       user: process.env.FEEDBACK_EMAIL,
       pass: process.env.FEEDBACK_EMAIL_PASSWORD,
     },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
   });
+
+  // This prevents hanging forever
+  await transporter.verify();
 
   const mailOptions = {
     from: `"Blogify Feedback" <${process.env.FEEDBACK_EMAIL}>`,
@@ -16,5 +22,5 @@ export const sendFeedbackMail = async (message) => {
     text: message,
   };
 
-  await transporter.sendMail(mailOptions);
+  return await transporter.sendMail(mailOptions);
 };
