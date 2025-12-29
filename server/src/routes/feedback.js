@@ -1,17 +1,11 @@
-import express from "express";
-import { sendFeedbackMail } from "../utils/sendMail.js";
-
-const router = express.Router();
-
 router.post("/", async (req, res) => {
-  const { feedback } = req.body;
+  const feedback = req.body.feedback || req.body.message || req.body.content;
 
   if (!feedback) {
     return res.status(400).json({ message: "Feedback is required" });
   }
 
   try {
-    // ⏱️ Do NOT let email hang forever
     await Promise.race([
       sendFeedbackMail(feedback),
       new Promise((_, reject) =>
@@ -26,12 +20,9 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error("Feedback error:", error);
 
-    // 🔥 ALWAYS respond
     return res.status(200).json({
       success: false,
       message: "Feedback received (email may have failed)",
     });
   }
 });
-
-export default router;
