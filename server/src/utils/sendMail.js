@@ -22,5 +22,9 @@ export const sendFeedbackMail = async (message) => {
     text: message,
   };
 
-  return await transporter.sendMail(mailOptions);
+  // return await transporter.sendMail(mailOptions);
+
+  const info = await transporter.sendMail(mailOptions);
+  console.log("Mail sent response:", info.response);
+  return info;
 };
