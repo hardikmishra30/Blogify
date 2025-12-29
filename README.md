@@ -18,7 +18,7 @@ A modern, responsive blog platform built with Node.js, Express, React, and Supab
 npm run install:all
 ```
 
-### 4. Run the Application
+### Run the Application
 
 ```bash
 npm run dev
