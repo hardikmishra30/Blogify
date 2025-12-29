@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+
 import authRoutes from "./routes/authRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import feedbackRoutes from "./routes/feedback.js";
@@ -15,7 +16,6 @@ const PORT = process.env.PORT || 3010;
 // Middleware
 app.use(
   cors({
-    // origin: process.env.FRONTEND_URL,
     origin: true,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/feedback", feedbackRoutes);
 
-// Global error handler to format multer and validation errors
+// Global error handler
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   if (req.fileValidationError) {
@@ -48,19 +48,23 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "Server is running" });
 });
 
+/*  STATIC FRONTEND SERVE */
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve Vite build
-app.use(express.static(path.join(__dirname, "..", "public", "dist")));
+// absolute path → /server/public/dist
+const clientDistPath = path.resolve(__dirname, "..", "public", "dist");
+
+// serve frontend assets
+app.use(express.static(clientDistPath));
 
 // SPA fallback
 app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "..", "public", "dist", "index.html")
-  );
+  res.sendFile(path.join(clientDistPath, "index.html"));
 });
 
+/* ======================= */
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
