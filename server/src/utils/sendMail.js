@@ -17,7 +17,7 @@ export const sendFeedbackMail = async (message) => {
 
   const mailOptions = {
     from: `"Blogify Feedback" <${process.env.FEEDBACK_EMAIL}>`,
-    to: process.env.FEEDBACK_EMAIL,
+    to: process.env.FEEDBACK_TO_EMAIL,
     subject: "New Feedback Received - Blogify",
     text: message,
   };
