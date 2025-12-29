@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-
+import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import feedbackRoutes from "./routes/feedback.js";
@@ -48,15 +48,19 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "Server is running" });
 });
 
-const __dirname = process.cwd();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Serve Vite build
-app.use(express.static(path.join(__dirname, "public", "dist")));
+app.use(express.static(path.join(__dirname, "..", "public", "dist")));
 
 // SPA fallback
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "dist", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "..", "public", "dist", "index.html")
+  );
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
